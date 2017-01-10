@@ -1,21 +1,30 @@
 import { Component } from '@angular/core';
+import { Hero } from './hero';
 
-export class Hero {
-  id: number;
-  name: string;
-}
+const HEROES: Hero[] = [
+  { id:2, name: "Young Nasty Man" },
+  { id:3, name: "Wonderboy" }
+];
 
 @Component({
-  selector: 'my-app',
+  selector: '#heroes-app',
   template: `
-  <h2>{{hero.name}} Details</h2>
-  <div><label>id:</label> <span>{{hero.id}}</span></div>
-  <div><label>name:</label> <span>{{hero.name}}</span></div>
-  `,
+  <h2>My Heroes</h2>
+  <ul class="heroes">
+    <li *ngFor="let hero of heroes" (click)="onSelect(hero)" [class.selected]="hero === selectedHero">
+      <span class="badge">{{hero.id}}</span><span class="text">{{hero.name}}</span>
+    </li>
+  </ul>
+  <hero-detail [hero]="selectedHero"></hero-detail>
+  `
 })
+
 export class AppComponent  {
-  hero: Hero = {
-    id: 1,
-    name: "Dr. Hero"
-  };
+  title = "Tour of Heroes";
+  heroes = HEROES;
+  selectedHero: Hero;
+
+  onSelect(hero: Hero): void {
+    this.selectedHero = hero;
+  }
 }
