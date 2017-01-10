@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { Hero } from './hero';
 
 const HEROES: Hero[] = [
-  { id:2, name: "Young Nasty Man" },
-  { id:3, name: "Wonderboy" }
+  { id:3, name: "Wonderboy", icon:"face" },
+  { id:2, name: "Young Nasty Man", icon:"flight" }
 ];
 
 @Component({
@@ -12,7 +12,7 @@ const HEROES: Hero[] = [
   <h2>My Heroes</h2>
   <ul class="heroes">
     <li *ngFor="let hero of heroes" (click)="onSelect(hero)" [class.selected]="hero === selectedHero">
-      <span class="badge">{{hero.id}}</span><span class="text">{{hero.name}}</span>
+      <span class="badge"><i class="material-icons">{{hero.icon}}</i></span><span class="text">{{hero.name}}</span>
     </li>
   </ul>
   <hero-detail [hero]="selectedHero"></hero-detail>
